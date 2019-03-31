@@ -1,19 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="background-color: darkgray;" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DATABASE PROJECT</title>
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
+      li {
+        float: left;
+      }
 
-<body>
-  <form method="post">
-    <input type="text" name="title">
-    <br>
-    <textarea cols="30" rows="7" name="body"></textarea>
-    <br>
-    <button type="submit">Submit</button>
-  </form>
-</body>
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
 
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: #4caf50;
+      }
+
+      table {
+        border: 1px solid grey;
+        margin: auto;
+      }
+
+      th {
+        border: 1px solid grey;
+      }
+
+      td {
+        border: 1px solid grey;
+        text-align: center;
+      }
+
+      input {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <ul>
+    <li>
+      <a href="/"
+        ><img
+          src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911640home.png"
+          width="17"
+          height="17"
+      /></a>
+    </li>
+    <li
+      style="color: white;
+    text-align: center; margin-left: 600px; "
+    >
+      Добавление новой песни
+    </li>
+    <li style="float:right">
+      <a
+        ><img
+          src="https://image.flaticon.com/icons/png/512/60/60746.png"
+          width="16"
+          height="16"
+      /></a>
+    </li>
+  </ul>
+  <body>
+    <form method="POST">
+      <input type="text" name="artist" />
+      <br />
+      <input type="text" name="title" />
+      <br />
+      <textarea cols="30" rows="7" name="string"></textarea>
+      <br />
+      <input type="text" name="lastword" />
+
+      <button type="submit">Add</button>
+    </form>
+  </body>
 </html>
