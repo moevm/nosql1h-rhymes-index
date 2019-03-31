@@ -1,33 +1,36 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+var express = require("express");
+const bodyParser = require("body-parser");
+const Song = require("./models/song");
 
-const Post = require('./models/post');
+var app = express();
 
-const app = express();
-
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  Post.find({})
-    .then(posts => {
-      res.render('index', { posts: posts });
-    })
-    .catch(err => {
-      res.status(200).json({ err: err });
-    });
+app.get("/", function(req, res) {
+  Song.find({}).then(songs => {
+    res.render("index", { songs: songs });
+  });
 });
 
-app.get('/create', (req, res) => res.render('create'));
-app.post('/create', (req, res) => {
-  const { title, body } = req.body;
+app.get("/ok", function(req, res) {
+  Song.find({ lastword: "сколько" }).then(songs => {
+    res.render("index", { songs: songs });
+  });
+});
 
-  Post.create({
+app.get("/create", function(req, res) {
+  res.render("create");
+});
+app.post("/create", function(req, res) {
+  const { artist, title, string, lastword } = req.body;
+  Song.create({
+    artist: artist,
     title: title,
-    body: body
-  }).then(post => console.log(post.id));
-
-  res.redirect('/');
+    string: string,
+    lastword: lastword
+  }).then(song => console.log(song._id));
+  res.redirect("/");
 });
 
 module.exports = app;
