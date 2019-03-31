@@ -1,26 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="background-color: darkgray;" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DATABASE PROJECT</title>
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
+      li {
+        float: left;
+      }
 
-<body>
-  <a href="/create">Add</a>
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: #4caf50;
+      }
+
+      table {
+        border: 1px solid grey;
+        margin: auto;
+      }
+
+      th {
+        border: 1px solid grey;
+      }
+
+      td {
+        border: 1px solid grey;
+        text-align: center;
+      }
+    </style>
+  </head>
   <ul>
-    <% posts.forEach(function(post){ %>
+    <li>
+      <a>Поиск песни</a>
+    </li>
+    <li>
+      <a href="/create">Добавить песню</a>
+    </li>
+    <li style="float:right">
+      <a
+        ><img
+          src="https://image.flaticon.com/icons/png/512/60/60746.png"
+          width="16"
+          height="16"
+      /></a>
+    </li>
+  </ul>
+  <body>
+    <!-- <ul>
+      <% songs.forEach(function(song){ %>
       <li>
         <b>
-          <%= post.title %>
+          <%= song.title %>
         </b>
-        <br>
-        <%= post.body %>
+        <br />
+        <%= song.artist %>
+        <br />
+        <%= song.string %>
+        <br />
+        <%= song.lastword %>
       </li>
-
-      <br>
+      <br />
       <% }); %>
-  </ul>
-</body>
-
+    </ul> -->
+    <br />
+    <br />
+    <input
+      style="width: 50%; margin-left: 300px;"
+      type="text"
+      name="word"
+      id="myword"
+    />
+    <a href="/ok"><button onlick="return false;">Искать</button></a>
+    <button id="FindSong" type="submit">Статистика</button>
+    <br />
+    <script>
+      const FindSongButton = window.document.getElementById("FindSong");
+      FindSongButton.addEventListener("click", function() {
+        alert("hello");
+        Song.find({ lastword: "сколько" }).exec(function(err, songs) {
+          if (err) throw err;
+        });
+        alert("songs");
+      });
+    </script>
+    <br />
+    <table style="width: 80%;">
+      <tr>
+        <th>Автор</th>
+        <th>Название песни</th>
+        <th>Строка</th>
+        <th>More</th>
+      </tr>
+      <% songs.forEach(function(song){ %>
+      <tr>
+        <td>
+          <%= song.artist %>
+        </td>
+        <td>
+          <%= song.title %>
+        </td>
+        <td>
+          <%= song.string %>
+        </td>
+        <td>
+          <a href="/create" style="color: blue;">Текст</a>
+        </td>
+      </tr>
+      <% }); %>
+    </table>
+  </body>
 </html>
