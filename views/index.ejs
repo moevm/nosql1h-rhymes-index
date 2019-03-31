@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>DATABASE PROJECT</title>
+
     <style>
       ul {
         list-style-type: none;
         margin: 0;
+
         padding: 0;
         overflow: hidden;
         background-color: #333;
@@ -88,10 +90,10 @@
       name="word"
       id="myword"
     />
-    <a href="/ok"><button onlick="return false;">Искать</button></a>
+    <button id="search">Искать</button>
     <button id="FindSong" type="submit">Статистика</button>
     <br />
-    <script>
+    <!-- <script>
       const FindSongButton = window.document.getElementById("FindSong");
       FindSongButton.addEventListener("click", function() {
         alert("hello");
@@ -100,7 +102,7 @@
         });
         alert("songs");
       });
-    </script>
+    </script> -->
     <br />
     <table style="width: 80%;">
       <tr>
@@ -126,5 +128,7 @@
       </tr>
       <% }); %>
     </table>
+
+    <script src ="../main.js"></script>
   </body>
 </html>

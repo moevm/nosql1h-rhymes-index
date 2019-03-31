@@ -4,6 +4,10 @@ const Song = require("./models/song");
 
 var app = express();
 
+app.use(express.static('views'));
+
+
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -13,8 +17,12 @@ app.get("/", function(req, res) {
   });
 });
 
-app.get("/ok", function(req, res) {
-  Song.find({ lastword: "сколько" }).then(songs => {
+
+
+app.get("/search", function(req, res) {
+  // var str  = new RegExp(req.query.word, 'z');
+  var str = req.query.word;
+  Song.find({ lastword: {$regex: str+'$'}}).then(songs => {
     res.render("index", { songs: songs });
   });
 });
