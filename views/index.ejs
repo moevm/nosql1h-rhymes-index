@@ -6,28 +6,56 @@
 
     <style>
       ul {
-        list-style-type: none;
+        display: block;
         margin: 0;
-
         padding: 0;
-        overflow: hidden;
+        list-style: none;
         background-color: #333;
       }
-
-      li {
-        float: left;
-      }
-
-      li a {
+      ul:after {
         display: block;
+        content: " ";
+        clear: both;
+        float: none;
+      }
+      ul.menu > li {
+        float: left;
+        position: relative;
+      }
+      ul.menu > li > a {
+        display: block;
+        padding: 10px;
         color: white;
-        text-align: center;
-        padding: 14px 16px;
+        background-color: #333;
         text-decoration: none;
       }
-
-      li a:hover:not(.active) {
-        background-color: #111;
+      ul.menu > li > a:hover {
+        background-color: black;
+      }
+      ul.submenu {
+        display: none;
+        position: absolute;
+        width: 120px;
+        top: 37px;
+        left: 0;
+        background-color: white;
+        border: 1px solid #333;
+      }
+      ul.submenu > li {
+        display: block;
+      }
+      ul.submenu > li > a {
+        display: block;
+        padding: 10px;
+        color: white;
+        background-color: #333;
+        text-decoration: none;
+      }
+      ul.submenu > li > a:hover {
+        text-decoration: underline;
+      }
+      ul.menu > li:hover > ul.submenu {
+        display: block;
       }
 
       .active {
@@ -49,20 +77,24 @@
       }
     </style>
   </head>
-  <ul>
+  <ul class="menu">
     <li>
-      <a>Поиск песни</a>
+      <a href="/searchsong">Поиск песни</a>
     </li>
     <li>
       <a href="/create">Добавить песню</a>
     </li>
-    <li style="float:right">
+    <li class="submenu">
       <a
         ><img
           src="https://image.flaticon.com/icons/png/512/60/60746.png"
           width="16"
           height="16"
       /></a>
+      <ul class="submenu">
+        <li><a href="">IMPORT</a></li>
+        <li><a href="">EXPORT</a></li>
+      </ul>
     </li>
   </ul>
   <body>
@@ -89,6 +121,7 @@
       type="text"
       name="word"
       id="myword"
+      placeholder="Введите слово"
     />
     <button id="search">Искать</button>
     <button id="FindSong" type="submit">Статистика</button>
@@ -123,12 +156,12 @@
           <%= song.string %>
         </td>
         <td>
-          <a href="/create" style="color: blue;">Текст</a>
+          <a href="" style="color: blue;">Текст</a>
         </td>
       </tr>
       <% }); %>
     </table>
 
-    <script src ="../main.js"></script>
+    <script src="../main.js"></script>
   </body>
 </html>

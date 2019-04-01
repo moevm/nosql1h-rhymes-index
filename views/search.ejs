@@ -45,16 +45,6 @@
         border: 1px solid grey;
         text-align: center;
       }
-
-      input {
-        width: 50%;
-        margin-left: 300px;
-      }
-
-      textarea {
-        width: 50%;
-        margin-left: 300px;
-      }
     </style>
   </head>
   <ul>
@@ -68,37 +58,49 @@
     </li>
     <li
       style="color: white;
-    text-align: center; margin-left: 600px; "
+        text-align: center; margin-left: 600px; "
     >
-      Добавление новой песни
+      Поиск песни
     </li>
   </ul>
   <body>
     <br />
     <br />
-    <form method="POST">
-      <input type="text" name="artist" placeholder="Введите исполнителя" />
-      <br />
-      <br />
-      <input type="text" name="title" placeholder="Введите название" />
-      <br />
-      <br />
-      <textarea
-        cols="30"
-        rows="7"
-        name="string"
-        placeholder="Введите строку"
-      ></textarea>
-      <br />
-      <br />
-      <input
-        type="text"
-        name="lastword"
-        placeholder="Введите последнее слово"
-      />
-      <br />
-      <br />
-      <button style="margin-left: 300px; " type="submit">Добавить песню</button>
-    </form>
+    <input
+      style="width: 55%; margin-left: 300px;"
+      type="text"
+      name="word"
+      id="arttitl"
+      placeholder="Введите название или исполнителя песни"
+    />
+    <button id="searchsong">Искать</button>
+    <br />
+    <br />
+    <table style="width: 60%;">
+      <tr>
+        <th>Автор</th>
+        <th>Название песни</th>
+        <th>Просмотр текста</th>
+        <th>Удаление песни</th>
+      </tr>
+      <% songs.forEach(function(song){ %>
+      <tr>
+        <td>
+          <%= song.artist %>
+        </td>
+        <td>
+          <%= song.title %>
+        </td>
+        <td>
+          <a href="" style="color: blue;">Текст</a>
+        </td>
+        <td>
+          <a href="" style="color: red;">Удалить</a>
+        </td>
+      </tr>
+      <% }); %>
+    </table>
+
+    <script src="../mainsearch.js"></script>
   </body>
 </html>
