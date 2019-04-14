@@ -18,7 +18,6 @@ app.get("/", function(req, res) {
 app.get("/search", function(req, res) {
   // var str  = new RegExp(req.query.word, 'z');
   // var str = '/' + req.query.word + '/';
-  const word = req.query.word;
   const str =
     "(" +
     req.query.word
@@ -55,6 +54,7 @@ app.get("/searchsong", function(req, res) {
     res.render("search", { songs: songs });
   });
 });
+
 
 app.get("/create", function(req, res) {
   res.render("create");
