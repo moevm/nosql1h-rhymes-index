@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html >
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistic</title>
+
+    <style type="text/css">
+        #container {
+            height: 400px;
+            min-width: 310px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #container {
+            height: 400px;
+        }
+
+        ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        content: "";
+         display: inline-block;
+         height: 100%;
+         vertical-align: middle;
+         font-size: 115%;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 10px 10px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: #4caf50;
+      }
+    </style>
+</head>
+<ul>
+    <li>
+        <a href="/"><img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911640home.png"
+                width="17" height="17" /></a>
+    </li>
+    <li style="color: white;
+            text-align: center; margin-left: 650px; ">
+        Статистика
+    </li>
+</ul>
+</br>
+
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+    </br>
+    <input style="width: 55%; margin-left: 300px;" type="text" name="word" id="searchStat"
+        placeholder="Введите слово, для которого будет расчитана статистика" />
+    <button id="searchStatButton">Рассчитать</button>
+</br>
+</br>
+    <div id="container" style="height: 400px"></div>
+
+
+    <!-- <script type="text/javascript">
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column',
+                options3d: {
+                    enabled: true,
+                    alpha: 10,
+                    beta: 25,
+                    depth: 70
+                }
+            },
+            title: {
+                text: 'Статистика'
+            },
+            subtitle: {
+                text: 'Статистика по количеству слов-рифм во всех песнях.'
+            },
+            plotOptions: {
+                column: {
+                    depth: 25
+                }
+            },
+            xAxis: {
+                categories: ["sdfd", "dsfdsf", "sdfdsf", "dsf"],
+                labels: {
+                    skew3d: true,
+                    style: {
+                        fontSize: '16px'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: null
+                }
+            },
+            series: [{
+                name: 'Sales',
+                data: [2, 3, null, 4]
+            }]
+        });
+    </script> -->
+
+    <div id="container1" style="height: 500px"></div>
+
+    <script type="text/javascript">
+        // Highcharts.chart('container1', {
+        //     chart: {
+        //         type: 'pie',
+        //         options3d: {
+        //             enabled: true,
+        //             alpha: 45,
+        //             beta: 0
+        //         }
+        //     },
+        //     title: {
+        //         text: 'Количество слов-рифм в каждой песне.'
+        //     },
+        //     tooltip: {
+        //         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        //     },
+        //     plotOptions: {
+        //         pie: {
+        //             allowPointSelect: true,
+        //             cursor: 'pointer',
+        //             depth: 35,
+        //             dataLabels: {
+        //                 enabled: true,
+        //                 format: '{point.name}'
+        //             }
+        //         }
+        //     },
+        //     series: [{
+        //         type: 'pie',
+        //         name: 'Browser share',
+        //         data: [
+        //             ['Firefox', 45.0],
+        //             ['IE', 26.8],
+        //             {
+        //                 name: 'Chrome',
+        //                 y: 12.8,
+        //                 sliced: true,
+        //                 selected: true
+        //             },
+        //             ['Safari', 8.5],
+        //             ['Opera', 6.2],
+        //             ['Others', 0.7]
+        //         ]
+        //     }]
+        // });
+    </script>
+
+    <script src="../mainStats.js"></script>
+</body>
+
+</html>

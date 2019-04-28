@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <title>DATABASE PROJECT</title>
-
+    <!-- <script type="text/javascript">
+      function disp(myid) {
+        document.getElementById(myid).style.display = "block";
+      }
+    </script> -->
     <style>
       ul {
         display: block;
@@ -84,6 +88,9 @@
     <li>
       <a href="/create">Добавить песню</a>
     </li>
+    <li>
+      <a href="/statistic">Статистика</a>
+    </li>
     <li class="submenu">
       <a
         ><img
@@ -123,8 +130,8 @@
       id="myword"
       placeholder="Введите слово"
     />
-    <button id="search">Искать</button>
-    <button id="FindSong" type="submit">Статистика</button>
+    <button id="search" onClick="disp('table')">Искать</button>
+    <!-- <button id="stats">Статистика</button> -->
     <br />
     <!-- <script>
       const FindSongButton = window.document.getElementById("FindSong");
@@ -137,7 +144,7 @@
       });
     </script> -->
     <br />
-    <table style="width: 80%;">
+    <table id="table" style="width: 80%; ">
       <tr>
         <th>Автор</th>
         <th>Название песни</th>
