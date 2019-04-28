@@ -1,3 +1,5 @@
+
+
 window.onload = function() {
   const FindSongButton = document.getElementById("FindSong");
   FindSongButton.addEventListener("click", myfunc);
@@ -11,7 +13,6 @@ function myfunc() {
 // function disp() {
 //   document.getElementByld("table").style.display = "default";
 // }
-
 document.getElementById("search").addEventListener("click", () => {
   //   disp();
   const val = document.getElementById("myword").value;
@@ -37,3 +38,4 @@ document.getElementById("search").addEventListener("click", () => {
 
 //     document.location.href = ("/statistic");
 // });
+

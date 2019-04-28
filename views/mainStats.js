@@ -103,3 +103,4 @@ document.getElementById("searchStatButton").addEventListener("click", () => {
       });
     });
 });
+
