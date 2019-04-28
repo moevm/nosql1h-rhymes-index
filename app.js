@@ -16,7 +16,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/statistic", function(req, res) {
-  res.render('statistic');
+  res.render("statistic");
 });
 
 app.get("/api/statistic", function(req, res) {

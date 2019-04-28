@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html >
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -19,16 +19,36 @@
         }
 
         ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
 
-        li {
-            float: left;
-        }
+      li {
+        content: "";
+         display: inline-block;
+         height: 100%;
+         vertical-align: middle;
+         font-size: 115%;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 10px 10px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: #4caf50;
+      }
     </style>
 </head>
 <ul>
@@ -37,10 +57,11 @@
                 width="17" height="17" /></a>
     </li>
     <li style="color: white;
-            text-align: center; margin-left: 600px; ">
-        Поиск песни
+            text-align: center; margin-left: 650px; ">
+        Статистика
     </li>
 </ul>
+</br>
 
 <body>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -51,8 +72,10 @@
 
     </br>
     <input style="width: 55%; margin-left: 300px;" type="text" name="word" id="searchStat"
-        placeholder="Введите название или исполнителя песни" />
-    <button id="searchStatButton">Искать</button>
+        placeholder="Введите слово, для которого будет расчитана статистика" />
+    <button id="searchStatButton">Рассчитать</button>
+</br>
+</br>
 
     <div id="container" style="height: 400px"></div>
 
