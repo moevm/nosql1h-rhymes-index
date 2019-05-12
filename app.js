@@ -111,8 +111,9 @@ app.get("/search", function(req, res) {
       .join("|")
       .slice(0, -1) +
     ")";
-  // for (i=0; i<str.lenght; i++){
-  //   str = str.substring(i)
+  // for (i = 0; i < str.lenght; i++) {
+  //   str = str.substring(i);
+  // }
   Song.find({ lastword: { $regex: str + "$" } }).then(songs => {
     res.render("index", { songs });
   });
@@ -121,15 +122,34 @@ app.get("/search", function(req, res) {
 
 app.get("/searchsong", function(req, res) {
   const song = req.query.song;
+
+  if (song) {
+    var songarr = song.toString().split("|");
+    var art = songarr[0];
+    var titl = songarr[1];
+    console.log(titl);
+    console.log(art);
+    console.log(songarr.join(" / "));
+  }
   if (!song) {
     Song.find({}).then(songs => {
       res.render("search", { songs: songs });
     });
   }
+  if (art && !titl) {
+    Song.find({ artist: { $regex: art, $options: "/i" } }).then(songs => {
+      res.render("search", { songs: songs });
+    });
+  }
+  if (!art && titl) {
+    Song.find({ title: { $regex: titl, $options: "/i" } }).then(songs => {
+      res.render("search", { songs: songs });
+    });
+  }
   Song.find({
-    $or: [
-      { artist: { $regex: song, $options: "/i" } },
-      { title: { $regex: song, $options: "/i" } }
+    $and: [
+      { artist: { $regex: art, $options: "/i" } },
+      { title: { $regex: titl, $options: "/i" } }
     ]
   }).then(songs => {
     res.render("search", { songs: songs });
@@ -141,12 +161,25 @@ app.get("/create", function(req, res) {
 });
 app.post("/create", function(req, res) {
   const { artist, title, string, lastword } = req.body;
-  Song.create({
-    artist: artist,
-    title: title,
-    string: string,
-    lastword: lastword
-  }).then(song => console.log(song._id));
+  var findlw;
+  var strarr = string.split("\r\n");
+
+  strarr.forEach(function(item, i, strarr) {
+    findlw = item
+      .toLowerCase()
+      .split(" ")
+      .splice(-1);
+    findlw = findlw.toString().replace(",", "");
+    findlw = findlw.toString().replace("!", "");
+    findlw = findlw.toString().replace("?", "");
+    findlw = findlw.toString().replace(" ", "");
+    Song.create({
+      artist: artist,
+      title: title,
+      string: item,
+      lastword: findlw
+    }).then(song => console.log(song._id));
+  });
   res.redirect("/");
 });
 
