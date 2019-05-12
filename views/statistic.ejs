@@ -17,13 +17,31 @@
         #container {
             height: 400px;
         }
-
+        button {
+        display: inline-block;
+        color: rgb(51, 51, 51);
+        font-weight: 700;
+        text-decoration: none;
+        user-select: none;
+        padding: 0.5em 2em;
+        outline: none;
+        border: 2px solid;
+        border-radius: 5px;
+        transition: 0.2s;
+      }
+      button:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      button:active {
+        background: rgb(99, 98, 98);
+      }
         ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
         background-color: #333;
+        border-radius: 10px;
       }
 
       li {
@@ -57,7 +75,7 @@
                 width="17" height="17" /></a>
     </li>
     <li style="color: white;
-            text-align: center; margin-left: 650px; ">
+            text-align: center; margin-left: 620px; ">
         Статистика
     </li>
 </ul>
@@ -72,7 +90,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
     </br>
-    <input style="width: 55%; margin-left: 300px;" type="text" name="word" id="searchStat"
+    <input style="width: 55%; margin-left: 300px; border-radius: 5px" type="text" name="word" id="searchStat"
         placeholder="Введите слово, для которого будет расчитана статистика" />
     <button id="searchStatButton">Рассчитать</button>
 </br>

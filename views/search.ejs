@@ -5,13 +5,31 @@
     <title>DATABASE PROJECT</title>
     <style>
       ul {
+        border-radius: 10px;
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background-color: #333;
+        background-color: rgb(51, 51, 51);
       }
-
+      button {
+        display: inline-block;
+        color: rgb(51, 51, 51);
+        font-weight: 700;
+        text-decoration: none;
+        user-select: none;
+        padding: 0.5em 2em;
+        outline: none;
+        border: 2px solid;
+        border-radius: 5px;
+        transition: 0.2s;
+      }
+      button:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      button:active {
+        background: rgb(99, 98, 98);
+      }
       li {
         content: "";
         display: inline-block;
@@ -61,7 +79,7 @@
       /></a>
     </li>
     <li
-      style="color: white;
+      style=" color: white;
         text-align: center; margin-left: 600px; "
     >
       Поиск песни
@@ -71,20 +89,24 @@
     <br />
     <br />
     <input
-      style="width: 55%; margin-left: 300px;"
+      style="width: 40%; margin-left: 420px; border-radius: 5px"
       type="text"
       name="word"
       id="arttitl"
       placeholder="Введите исполнителя песни"
     />
-    <button id="searchsong">Искать</button>
+
     <input
-      style="width: 55%; margin-left: 300px;"
+      style="width: 40%; margin-left: 420px; margin-top: 5px; border-radius: 5px"
       type="text"
       name="word"
       id="titl"
       placeholder="Введите название песни"
     />
+    <br />
+    <button id="searchsong" style="margin-left:640px; margin-top: 5px">
+      Искать
+    </button>
 
     <br />
     <br />
@@ -104,10 +126,18 @@
           <%= song.title %>
         </td>
         <td>
-          <a href="" style="color: blue;">Текст</a>
+          <a
+            href="/text?a=<%=song.artist%>&b=<%=song.title%>"
+            style="color: blue;"
+            >Текст</a
+          >
         </td>
         <td>
-          <a href="" style="color: red;">Удалить</a>
+          <a
+            href="/delete?a=<%=song.artist%>&b=<%=song.title%>"
+            style="color: red;"
+            >Удалить</a
+          >
         </td>
       </tr>
       <% }); %>

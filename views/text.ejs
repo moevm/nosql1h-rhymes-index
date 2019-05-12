@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html style="background-color: darkgray;" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DATABASE PROJECT</title>
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        font-size: 115%;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 10px 10px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: #4caf50;
+      }
+
+      table {
+        margin-left: 40%;
+      }
+    </style>
+  </head>
+  <ul>
+    <li>
+      <a href="/"
+        ><img
+          src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911640home.png"
+          width="17"
+          height="17"
+      /></a>
+    </li>
+    <li
+      style="color: white;
+          text-align: center; margin-left: 600px; "
+    >
+      <%= songs[0].artist %><%= " " + '"' + songs[0].title + '"' %>
+    </li>
+  </ul>
+  <body>
+    <table id="table" style="width: 80%; ">
+      <% songs.forEach(function(song){ %>
+      <tr>
+        <td>
+          <%= song.string %>
+        </td>
+      </tr>
+      <% }); %>
+    </table>
+  </body>
+</html>
