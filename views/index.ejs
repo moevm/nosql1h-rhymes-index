@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>DATABASE PROJECT</title>
-
+    <!-- <script type="text/javascript">
+      function disp(myid) {
+        document.getElementById(myid).style.display = "block";
+      }
+    </script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <style>
       ul {
         display: block;
@@ -32,6 +37,7 @@
       ul.menu > li > a:hover {
         background-color: black;
       }
+
       ul.submenu {
         display: none;
         position: absolute;
@@ -84,6 +90,9 @@
     <li>
       <a href="/create">Добавить песню</a>
     </li>
+    <li>
+      <a href="/statistic">Статистика</a>
+    </li>
     <li class="submenu">
       <a
         ><img
@@ -92,28 +101,19 @@
           height="16"
       /></a>
       <ul class="submenu">
-        <li><a href="">IMPORT</a></li>
-        <li><a href="">EXPORT</a></li>
+        <li><a href="#" id="import">IMPORT</a></li>
+        <li>
+          <input name="file" type="file" id="input-file" /><a
+            href="/export"
+            target="_blank"
+            >EXPORT</a
+          >
+        </li>
       </ul>
     </li>
   </ul>
+  <!-- <button id="export">EXPORT</button> -->
   <body>
-    <!-- <ul>
-      <% songs.forEach(function(song){ %>
-      <li>
-        <b>
-          <%= song.title %>
-        </b>
-        <br />
-        <%= song.artist %>
-        <br />
-        <%= song.string %>
-        <br />
-        <%= song.lastword %>
-      </li>
-      <br />
-      <% }); %>
-    </ul> -->
     <br />
     <br />
     <input
@@ -123,21 +123,10 @@
       id="myword"
       placeholder="Введите слово"
     />
-    <button id="search">Искать</button>
-    <button id="stats">Статистика</button>
+    <button id="search" onClick="disp('table')">Искать</button>
     <br />
-    <!-- <script>
-      const FindSongButton = window.document.getElementById("FindSong");
-      FindSongButton.addEventListener("click", function() {
-        alert("hello");
-        Song.find({ lastword: "сколько" }).exec(function(err, songs) {
-          if (err) throw err;
-        });
-        alert("songs");
-      });
-    </script> -->
     <br />
-    <table style="width: 80%;">
+    <table id="table" style="width: 80%; ">
       <tr>
         <th>Автор</th>
         <th>Название песни</th>
@@ -156,12 +145,42 @@
           <%= song.string %>
         </td>
         <td>
-          <a href="" style="color: blue;">Текст</a>
+          <a href="/song?a=<%=song.artist%>&b=<%=song.title%>" style="color: blue;">Текст</a>
         </td>
       </tr>
       <% }); %>
     </table>
 
+    <script>
+      const query = document.location.search
+        .replace(/(^\?)/, "")
+        .split("&")
+        .map(
+          function(n) {
+            return (n = n.split("=")), (this[n[0]] = n[1]), this;
+          }.bind({})
+        )[0];
+      if (query["bad-auth"]) {
+        $("#bad").css("display", "inline-block");
+      }
+      $("#import").click(function() {
+        $("input[name='file']").click();
+      });
+      $("input[name='file']").change(function() {
+        let fd = new FormData();
+        fd.append("json", $(this).prop("files")[0]);
+        $.ajax({
+          url: "/import",
+          data: fd,
+          processData: false,
+          contentType: false,
+          type: "POST",
+          success: function() {
+            alert("База импортирована");
+          }
+        });
+      });
+    </script>
     <script src="../main.js"></script>
   </body>
 </html>
