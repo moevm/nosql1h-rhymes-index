@@ -6,7 +6,6 @@ const upload = require("express-fileupload");
 
 var app = express();
 
-const { dbImport, dbExport } = require("./dbLibs");
 app.use(upload());
 app.use(cookieParser());
 
@@ -19,6 +18,27 @@ app.get("/", function(req, res) {
   Song.find({}).then(songs => {
     res.render("index", { songs: songs });
   });
+});
+
+app.get("/text", (req, res) => {
+  const artist = req.query.a;
+  const title = req.query.b;
+  Song.find({ artist, title }).then(songs => {
+    res.render("text", {
+      songs: songs.sort((a, b) => {
+        return a._id > b._id ? 1 : a._id < b._id ? -1 : 0;
+      })
+    });
+  });
+});
+
+app.get("/delete", (req, res) => {
+  const artist = req.query.a;
+  const title = req.query.b;
+  Song.remove({ artist, title }).then(songs => {
+    res.render("search", { songs: songs });
+  });
+  res.redirect("/searchsong");
 });
 
 app.get("/statistic", function(req, res) {
@@ -80,19 +100,17 @@ app.post("/import", (req, res) => {
   const file = req.files.json;
   const doc = JSON.parse(file.data.toString("utf-8"));
 
-  dbImport(doc).then(() => {
-    res.sendStatus(200);
+  Song.insertMany(doc, err => {
+    if (err) {
+      res.status(500).send({ err: err.message });
+    } else {
+      res.sendStatus(200);
+    }
   });
 });
 
 app.get("/export", (req, res) => {
-  const reqSession = req.cookies.session;
-
-  if (reqSession && sessions[reqSession]) {
-    dbExport(sessions[reqSession]).then(json => {
-      res.send(json);
-    });
-  }
+  Song.find().then(data => res.send(data));
 });
 
 app.get("/search", function(req, res) {
@@ -115,7 +133,11 @@ app.get("/search", function(req, res) {
   //   str = str.substring(i);
   // }
   Song.find({ lastword: { $regex: str + "$" } }).then(songs => {
-    res.render("index", { songs });
+    res.render("index", {
+      songs: songs.filter(
+        (e, i, arr) => arr.findIndex(song => song.string === e.string) === i
+      )
+    });
   });
   // }
 });
@@ -133,17 +155,38 @@ app.get("/searchsong", function(req, res) {
   }
   if (!song) {
     Song.find({}).then(songs => {
-      res.render("search", { songs: songs });
+      res.render("search", {
+        songs: songs.filter(
+          (e, i, arr) =>
+            arr.findIndex(
+              song => song.author === e.author && song.title === e.title
+            ) === i
+        )
+      });
     });
   }
   if (art && !titl) {
     Song.find({ artist: { $regex: art, $options: "/i" } }).then(songs => {
-      res.render("search", { songs: songs });
+      res.render("search", {
+        songs: songs.filter(
+          (e, i, arr) =>
+            arr.findIndex(
+              song => song.author === e.author && song.title === e.title
+            ) === i
+        )
+      });
     });
   }
   if (!art && titl) {
     Song.find({ title: { $regex: titl, $options: "/i" } }).then(songs => {
-      res.render("search", { songs: songs });
+      res.render("search", {
+        songs: songs.filter(
+          (e, i, arr) =>
+            arr.findIndex(
+              song => song.author === e.author && song.title === e.title
+            ) === i
+        )
+      });
     });
   }
   Song.find({
@@ -152,7 +195,14 @@ app.get("/searchsong", function(req, res) {
       { title: { $regex: titl, $options: "/i" } }
     ]
   }).then(songs => {
-    res.render("search", { songs: songs });
+    res.render("search", {
+      songs: songs.filter(
+        (e, i, arr) =>
+          arr.findIndex(
+            song => song.author === e.author && song.title === e.title
+          ) === i
+      )
+    });
   });
 });
 

@@ -3,7 +3,7 @@ const dbImport = async function(doc) {
     collection.insertOne(doc, function(err, res) {
       if (err) throw err;
 
-      songs.push(doc);
+      shops.push(doc);
 
       console.log("[DB] 1 document inserted");
       resolve();
@@ -13,7 +13,7 @@ const dbImport = async function(doc) {
 
 const dbExport = async function(key) {
   return new Promise(resolve => {
-    resolve(songs.find(s => s.key === key) || {});
+    resolve(shops.find(s => s.key === key) || {});
   });
 };
 
