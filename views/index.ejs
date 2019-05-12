@@ -8,6 +8,9 @@
         document.getElementById(myid).style.display = "block";
       }
     </script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
     <style>
       ul {
         display: block;
@@ -36,6 +39,7 @@
       ul.menu > li > a:hover {
         background-color: black;
       }
+
       ul.submenu {
         display: none;
         position: absolute;
@@ -112,22 +116,6 @@
   </ul>
   <!-- <button id="export">EXPORT</button> -->
   <body>
-    <!-- <ul>
-      <% songs.forEach(function(song){ %>
-      <li>
-        <b>
-          <%= song.title %>
-        </b>
-        <br />
-        <%= song.artist %>
-        <br />
-        <%= song.string %>
-        <br />
-        <%= song.lastword %>
-      </li>
-      <br />
-      <% }); %>
-    </ul> -->
     <br />
     <br />
     <input
@@ -138,18 +126,8 @@
       placeholder="Введите слово"
     />
     <button id="search" onClick="disp('table')">Искать</button>
-    <!-- <button id="stats">Статистика</button> -->
+    
     <br />
-    <!-- <script>
-      const FindSongButton = window.document.getElementById("FindSong");
-      FindSongButton.addEventListener("click", function() {
-        alert("hello");
-        Song.find({ lastword: "сколько" }).exec(function(err, songs) {
-          if (err) throw err;
-        });
-        alert("songs");
-      });
-    </script> -->
     <br />
     <table id="table" style="width: 80%; ">
       <tr>
@@ -170,7 +148,7 @@
           <%= song.string %>
         </td>
         <td>
-          <a href="" style="color: blue;">Текст</a>
+          <a href="/song?a=<%=song.artist%>&b=<%=song.title%>" style="color: blue;">Текст</a>
         </td>
       </tr>
       <% }); %>

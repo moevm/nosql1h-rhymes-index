@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html >
+
+    <head>
+
+    </head>
+
+    <body>
+            <table id="table" style="width: 80%; ">
+                    <tr>
+                      <th>Автор</th>
+                      <th>Название песни</th>
+                      <th>Строка</th>
+                    </tr>
+                    <% songs.forEach(function(song){ %>
+                    <tr>
+                      <td>
+                        <%= song.artist %>
+                      </td>
+                      <td>
+                        <%= song.title %>
+                      </td>
+                      <td>
+                        <%= song.string %>
+                      </td>
+                      
+                    </tr>
+                    <% }); %>
+                  </table>
+    </body>
+
+</html>

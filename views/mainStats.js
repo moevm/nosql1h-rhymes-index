@@ -144,7 +144,7 @@ document.getElementById("searchStatButton").addEventListener("click", () => {
           labels: {
             skew3d: true,
             style: {
-              fontSize: "16px"
+              fontSize: "13px"
             }
           }
         },
